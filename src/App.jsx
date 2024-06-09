@@ -35,8 +35,6 @@ const App = () => {
   }, []); // Empty dependency array ensures useEffect only runs once when component mounts
 
 
-
- 
   const handleCourseUpload = (newCourse) => {
     // Update the courses state
     const updatedCourses = [...courses, newCourse];

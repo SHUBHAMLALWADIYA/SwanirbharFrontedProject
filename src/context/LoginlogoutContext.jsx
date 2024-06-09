@@ -13,5 +13,4 @@ const LoginlogoutContextProvider = ({ children }) => {
     </>
   );
 };
-
 export default LoginlogoutContextProvider;
