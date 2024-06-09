@@ -6,7 +6,6 @@ import LoginlogoutContextProvider from './context/LoginlogoutContext.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 <LoginlogoutContextProvider>
-
     <App />
 </LoginlogoutContextProvider>
   

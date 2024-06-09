@@ -13,16 +13,7 @@ const Signup = () => {
     const navigate = useNavigate(); // Use navigate hook
 
     const handleSignup = () => {
-        // Regular expression to validate email format
-        // const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    
-        // // Check if email matches the required format
-        // if (!emailRegex.test(email)) {
-        //     setError("Invalid email format");
-        //     return;
-        // }
-    
-        // Check if username and password are valid
+       
         if (password !== confirmPassword) {
             setError("Passwords do not match");
             return;

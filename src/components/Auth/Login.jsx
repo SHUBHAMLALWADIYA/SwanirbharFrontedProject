@@ -11,30 +11,7 @@ const Login = () => {
     const navigate = useNavigate();
     const {toggle,setToggle}=useContext(LoginlogoutContext)
 
-//     const handleLogin = () => {
-//         // Retrieve username and password from local storage
-//         const storedUsername = JSON.parse(localStorage.getItem("userData")).username;
-//         const storedPassword = JSON.parse(localStorage.getItem("userData")).password;
-// console.log("pass : ",storedPassword,"  username :",storedUsername)
-//         // Check if entered username and password match the stored values
-//         if (username === storedUsername && password === storedPassword) {
-//             // Successful login logic (for demonstration purposes)
-//             console.log("Login successful");
-//             toast({
-//                 title: "Login successful.",
-//                 description: "You have successfully logged in.",
-//                 status: "success",
-//                 duration: 5000,
-//                 isClosable: true,
-//             });
-//             setToggle(true)
-//             localStorage.setItem("login",true)
-//             console.log(localStorage.getItem("login"))
-//             navigate("/"); // Redirect to homepage after login
-//         } else {
-//             setError("Invalid username or password");
-//         }
-//     };
+
 const handleLogin = () => {
     // Retrieve username and password from local storage
     const storedUsername = JSON.parse(localStorage.getItem("userData")).username;
