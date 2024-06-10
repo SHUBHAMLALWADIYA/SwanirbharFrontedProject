@@ -31,8 +31,8 @@ const Home = () => {
           <Text fontSize="lg">
             
           </Text>
-          <Text fontSize="lg">
-            Vestibulum rutrum nisl eu orci sodales, in lobortis tortor pulvinar.
+          <Text fontSize="lg" color="blue">
+           <a href="https://drive.google.com/file/d/1CPAtZny0JZr332u8e-Ve9V8OBHDsNEB5/view?usp=sharing"> My Resume</a>
           </Text>
         </Box>
         <Box mt="12">
