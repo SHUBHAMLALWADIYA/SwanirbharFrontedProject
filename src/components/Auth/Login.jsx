@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Box, Button, Input, FormControl, FormLabel, Heading, Text, VStack, useToast } from "@chakra-ui/react";
+import { Box, Button, Input, FormControl, FormLabel, Heading, Text, VStack, useToast, useColorModeValue } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { LoginlogoutContext } from "../../context/LoginlogoutContext";
 
@@ -9,32 +9,39 @@ const Login = () => {
     const [error, setError] = useState("");
     const toast = useToast();
     const navigate = useNavigate();
-    const {toggle,setToggle}=useContext(LoginlogoutContext)
+    const { toggle, setToggle } = useContext(LoginlogoutContext);
 
+    const handleLogin = () => {
+        const storedUserData = JSON.parse(localStorage.getItem("userData"));
+        if (storedUserData) {
+            const { username: storedUsername, password: storedPassword } = storedUserData;
 
-const handleLogin = () => {
-    // Retrieve username and password from local storage
-    const storedUsername = JSON.parse(localStorage.getItem("userData")).username;
-    const storedPassword = JSON.parse(localStorage.getItem("userData")).password;
+            if (username === storedUsername && password === storedPassword) {
+                console.log("Login successful");
+                toast({
+                    title: "Login successful.",
+                    description: "You have successfully logged in.",
+                    status: "success",
+                    duration: 5000,
+                    isClosable: true,
+                });
+                localStorage.setItem("login", "true");
+                setToggle(true);
+                navigate("/");
+            } else {
+                setError("Invalid username or password");
+            }
+        } else {
+            setError("No user found. Please sign up first.");
+        }
+    };
 
-    // Check if entered username and password match the stored values
-    if (username === storedUsername && password === storedPassword) {
-        // Successful login logic
-        console.log("Login successful");
-        toast({
-            title: "Login successful.",
-            description: "You have successfully logged in.",
-            status: "success",
-            duration: 5000,
-            isClosable: true,
-        });
-        localStorage.setItem("login", "true"); // Store login state
-        setToggle(true); // Update login state in context
-        navigate("/"); // Redirect to homepage
-    } else {
-        setError("Invalid username or password");
-    }
-};
+    const boxBg = useColorModeValue('white', 'gray.700');
+    const headingColor = useColorModeValue('blue.500', 'blue.200');
+    const textColor = useColorModeValue('gray.500', 'gray.300');
+    const inputBorderColor = useColorModeValue('blue.300', 'blue.500');
+    const inputHoverBorderColor = useColorModeValue('blue.400', 'blue.600');
+    const errorColor = useColorModeValue('red.500', 'red.300');
 
     return (
         <Box
@@ -45,13 +52,13 @@ const handleLogin = () => {
             borderWidth="1px"
             borderRadius="lg"
             boxShadow="lg"
-            backgroundColor="white"
+            bg={boxBg}
         >
             <VStack spacing={3}>
-                <Heading as="h1" size="lg" mb="6" color="blue.500">
+                <Heading as="h1" size="lg" mb="6" color={headingColor}>
                     Login
                 </Heading>
-                <Text fontSize="lg" mb="4" color="gray.500">
+                <Text fontSize="lg" mb="4" color={textColor}>
                     Welcome back! Please login to continue.
                 </Text>
                 <FormControl id="username">
@@ -60,8 +67,8 @@ const handleLogin = () => {
                         placeholder="Enter your username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        borderColor="blue.300"
-                        _hover={{ borderColor: "blue.400" }}
+                        borderColor={inputBorderColor}
+                        _hover={{ borderColor: inputHoverBorderColor }}
                     />
                 </FormControl>
                 <FormControl id="password">
@@ -71,8 +78,8 @@ const handleLogin = () => {
                         placeholder="Enter your password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        borderColor="blue.300"
-                        _hover={{ borderColor: "blue.400" }}
+                        borderColor={inputBorderColor}
+                        _hover={{ borderColor: inputHoverBorderColor }}
                     />
                 </FormControl>
                 <Button
@@ -84,7 +91,7 @@ const handleLogin = () => {
                     Login
                 </Button>
                 {error && (
-                    <Box mt="4" color="red.500">
+                    <Box mt="4" color={errorColor}>
                         {error}
                     </Box>
                 )}

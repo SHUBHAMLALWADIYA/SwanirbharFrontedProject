@@ -14,7 +14,7 @@ const Header = () => {
   const { toggle } = useContext(LoginlogoutContext);
 
   return (
-    <Box bg="teal" p="4" position="fixed" width="84.2%" zIndex="999">
+    <Box bg="teal" p="4" position="fixed" width="100%" zIndex="999">
       <Flex alignItems="center">
         <Heading as="h1" size="md" color="white" mr="4">
           LMS Dashboard

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { ChakraProvider, Box, Container } from '@chakra-ui/react';
+import { ChakraProvider, Box, Container, Flex } from '@chakra-ui/react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
@@ -34,7 +34,6 @@ const App = () => {
     }
   }, []); // Empty dependency array ensures useEffect only runs once when component mounts
 
-
   const handleCourseUpload = (newCourse) => {
     // Update the courses state
     const updatedCourses = [...courses, newCourse];
@@ -55,13 +54,12 @@ const App = () => {
   return (
     <ChakraProvider>
       <Router>
-        <Box display="flex" minH="100vh">
+        <Flex direction="column" minH="100vh">
           <Sidebar />
-          <Box ml="250px" w="full">
-            <Header notifications={notifications} position="fixed" top="0" width="calc(100% - 250px)" zIndex="1000" />
-            <Box mt="60px" mb="40px">
-              <Container maxW="container.lg" >
-                <Routes>
+          <Box flex="1" mt={{ base: "60px", md: "auto" }}> {/* Adjusted margin top */}
+  <Box mb="40px">
+    <Container maxW="container.lg">
+      <Routes>
                   <Route exact path='/login' element={<Login />} />
                   <Route exact path='/signup' element={<Signup />} />
                   <Route exact path="/" element={<Home />} />
@@ -74,9 +72,9 @@ const App = () => {
                 </Routes>
               </Container>
             </Box>
-            <Footer  bottom="0" width="calc(100% - 250px)" zIndex="1000" />
+            <Footer bottom="0" width="full" />
           </Box>
-        </Box>
+        </Flex>
       </Router>
     </ChakraProvider>
   );

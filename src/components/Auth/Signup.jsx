@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Button, Input, Select, FormControl, FormLabel, Heading, Text, VStack, useToast } from "@chakra-ui/react";
+import { Box, Button, Input, Select, FormControl, FormLabel, Heading, Text, VStack, useToast, useColorModeValue } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
@@ -7,25 +7,22 @@ const Signup = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [role, setRole] = useState(""); // State for user role
+    const [role, setRole] = useState("");
     const [error, setError] = useState("");
     const toast = useToast();
-    const navigate = useNavigate(); // Use navigate hook
+    const navigate = useNavigate();
 
     const handleSignup = () => {
-       
         if (password !== confirmPassword) {
             setError("Passwords do not match");
             return;
         }
-    
-        // Check if role is selected
+
         if (!role) {
             setError("Please select a role");
             return;
         }
-    
-        // Save signup data to local storage
+
         const userData = {
             email,
             username,
@@ -33,9 +30,7 @@ const Signup = () => {
             role
         };
         localStorage.setItem('userData', JSON.stringify(userData));
-    
-        // Successful signup logic (for demonstration purposes)
-        console.log("Signup successful");
+
         toast({
             title: "Signup successful.",
             description: "You have successfully signed up.",
@@ -43,29 +38,33 @@ const Signup = () => {
             duration: 5000,
             isClosable: true,
         });
-    
-        // Navigate to login page after successful signup
+
         navigate("/login");
     };
-    
+
+    const boxBg = useColorModeValue('white', 'gray.700');
+    const headingColor = useColorModeValue('teal.500', 'teal.200');
+    const textColor = useColorModeValue('gray.500', 'gray.300');
+    const inputBorderColor = useColorModeValue('teal.300', 'teal.500');
+    const inputHoverBorderColor = useColorModeValue('teal.400', 'teal.600');
+    const errorColor = useColorModeValue('red.500', 'red.300');
 
     return (
         <Box
             maxW="sm"
             mx="auto"
-            mt="8"
+            mt="20"
             p="6"
             borderWidth="1px"
             borderRadius="lg"
             boxShadow="lg"
-            backgroundColor="white"
-            
+            bg={boxBg}
         >
             <VStack spacing={0.2}>
-                <Heading as="h1" size="lg" mb="2" color="teal.500">
+                <Heading as="h1" size="lg" mb="2" color={headingColor}>
                     Signup
                 </Heading>
-                <Text fontSize="lg" mb="2" color="gray.500">
+                <Text fontSize="lg" mb="2" color={textColor}>
                     Create a new account
                 </Text>
                 <FormControl id="email" isRequired>
@@ -75,8 +74,8 @@ const Signup = () => {
                         placeholder="Enter your email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        borderColor="teal.300"
-                        _hover={{ borderColor: "teal.400" }}
+                        borderColor={inputBorderColor}
+                        _hover={{ borderColor: inputHoverBorderColor }}
                     />
                 </FormControl>
                 <FormControl id="username" isRequired>
@@ -85,8 +84,8 @@ const Signup = () => {
                         placeholder="Enter your username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        borderColor="teal.300"
-                        _hover={{ borderColor: "teal.400" }}
+                        borderColor={inputBorderColor}
+                        _hover={{ borderColor: inputHoverBorderColor }}
                     />
                 </FormControl>
                 <FormControl id="password" isRequired>
@@ -96,8 +95,8 @@ const Signup = () => {
                         placeholder="Enter your password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        borderColor="teal.300"
-                        _hover={{ borderColor: "teal.400" }}
+                        borderColor={inputBorderColor}
+                        _hover={{ borderColor: inputHoverBorderColor }}
                     />
                 </FormControl>
                 <FormControl id="confirm-password" isRequired>
@@ -107,8 +106,8 @@ const Signup = () => {
                         placeholder="Confirm your password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
-                        borderColor="teal.300"
-                        _hover={{ borderColor: "teal.400" }}
+                        borderColor={inputBorderColor}
+                        _hover={{ borderColor: inputHoverBorderColor }}
                     />
                 </FormControl>
                 <FormControl id="role" isRequired>
@@ -117,8 +116,8 @@ const Signup = () => {
                         placeholder="Select your role"
                         value={role}
                         onChange={(e) => setRole(e.target.value)}
-                        borderColor="teal.300"
-                        _hover={{ borderColor: "teal.400" }}
+                        borderColor={inputBorderColor}
+                        _hover={{ borderColor: inputHoverBorderColor }}
                     >
                         <option value="student">Student</option>
                         <option value="admin">Admin</option>
@@ -133,7 +132,7 @@ const Signup = () => {
                     Signup
                 </Button>
                 {error && (
-                    <Box mt="4" color="red.500">
+                    <Box mt="4" color={errorColor}>
                         {error}
                     </Box>
                 )}
@@ -143,3 +142,4 @@ const Signup = () => {
 };
 
 export default Signup;
+

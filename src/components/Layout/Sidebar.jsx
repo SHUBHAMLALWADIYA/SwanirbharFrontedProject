@@ -13,6 +13,8 @@ import {
   Avatar,
   useColorMode,
   useColorModeValue,
+  useBreakpointValue,
+  Button,
 } from "@chakra-ui/react";
 import { FiHome, FiBook, FiUser } from "react-icons/fi";
 import { MdNotifications } from "react-icons/md";
@@ -23,11 +25,14 @@ const Sidebar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const menuBg = useColorModeValue('white', 'gray.700');
   const menuColor = useColorModeValue('black', 'white');
+  const menuHoverBg = useColorModeValue('gray.100', 'gray.600'); // Add hover background color
   const [notifications, setNotifications] = useState([]); // State for notifications
   const user = JSON.parse(localStorage.getItem("userData"));
   const { toggle } = useContext(LoginlogoutContext);
   const userData = user?.username;
   const roll = user?.role;
+  
+  const isMobile = useBreakpointValue({ base: true, md: false });
 
   // Function to add notification when a new course is added
   const addNotification = (course) => {
@@ -44,11 +49,105 @@ const Sidebar = () => {
     addNotification(newCourse);
   };
 
-  return (
+  const renderLinks = () => (
+    <>
+      <Link href="/" w="100%">
+        <HStack>
+          <FiHome />
+          <Text>Home</Text>
+        </HStack>
+      </Link>
+      <Link href="/login" w="100%">
+        <HStack>
+          <FiUser />
+          <Text>Login</Text>
+        </HStack>
+      </Link>
+      <Link href="/signup" w="100%">
+        <HStack>
+          <FiUser />
+          <Text>Signup</Text>
+        </HStack>
+      </Link>
+      <Link href="/courses" w="100%">
+        <HStack>
+          <FiBook />
+          <Text>Courses</Text>
+        </HStack>
+      </Link>
+      <Link href="/profile" w="100%">
+        <HStack>
+          <FiUser />
+          <Text>Profile</Text>
+        </HStack>
+      </Link>
+      <Link href="/profilePage" w="100%">
+        <HStack>
+          <FiUser />
+          <Text>Profile-Page</Text>
+        </HStack>
+      </Link>
+      <Link href="/upload-course" w="100%">
+        <HStack>
+          <FiUser />
+          <Text>AddNew-Course</Text>
+        </HStack>
+      </Link>
+    </>
+  );
+
+  return isMobile ? (
     <Box
       bg="gray.800"
       color="white"
-      w={{ base: "100%", md: "250px" }} // Adjust width based on screen size
+      w="100%"
+      p="4"
+      position="fixed"
+      top="0"
+      zIndex="1"
+    >
+      <HStack justify="space-between" w="100%">
+        <Text fontSize="xl" fontWeight="bold">LMS Dashboard</Text>
+        <HStack>
+          <Menu>
+            <MenuButton
+              as={Button}
+              rightIcon={<ChevronDownIcon />}
+              bg="transparent"
+              _hover={{ bg: 'transparent' }}
+              _active={{ bg: 'transparent' }}
+              _focus={{ boxShadow: 'none' }}
+              color={menuColor} // Set text color
+            >
+              Menu
+            </MenuButton>
+            <MenuList
+              bg={menuBg}
+              color={menuColor}
+              boxShadow="md"
+              borderRadius="md"
+              py="2"
+              px="3"
+              _hover={{ bg: menuHoverBg }} // Set hover background color
+              transition="background-color 0.3s"
+            >
+              {renderLinks()}
+            </MenuList>
+          </Menu>
+          <IconButton
+            aria-label="Toggle theme"
+            icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+            onClick={toggleColorMode}
+            size="sm"
+          />
+        </HStack>
+      </HStack>
+    </Box>
+  ) : (
+    <Box
+      bg="gray.800"
+      color="white"
+      w="250px"
       h="100vh"
       p="5"
       position="fixed"
@@ -61,40 +160,7 @@ const Sidebar = () => {
             <Text fontSize="sm" color="gray.400">{roll}</Text>
           </Box>
         </HStack>
-
-        <Link href="/" w="100%">
-          <HStack>
-            <FiHome />
-            <Text>Home</Text>
-          </HStack>
-        </Link>
-
-        <Link href="/courses" w="100%">
-          <HStack>
-            <FiBook />
-            <Text>Courses</Text>
-          </HStack>
-        </Link>
-
-        <Link href="/profile" w="100%">
-          <HStack>
-            <FiUser />
-            <Text>Profile</Text>
-          </HStack>
-        </Link>
-        <Link href="/profilePage" w="100%">
-          <HStack>
-            <FiUser />
-            <Text>Profile-Page</Text>
-          </HStack>
-        </Link>
-        <Link href="/upload-course" w="100%">
-          <HStack>
-            <FiUser />
-            <Text>AddNew-Course</Text>
-          </HStack>
-        </Link>
-
+        {renderLinks()}
         <Menu>
           <MenuButton as={HStack} w="100%">
             <HStack>
@@ -109,7 +175,6 @@ const Sidebar = () => {
             ))}
           </MenuList>
         </Menu>
-
         <HStack w="100%" justify="space-between">
           <Text>Toggle Theme</Text>
           <IconButton
