@@ -13,7 +13,7 @@ const UserProfile = ({ user }) => {
     };
 
     return (
-        <Box p="4" border="1px solid #E2E8F0" borderRadius="lg" maxW="md" mx="auto">
+        <Box p="4" border="1px solid #E2E8F0" borderRadius="lg" maxW="md" mx="auto" mt={20}>
             <Avatar name={user?.username} src={user?.avatar} mb="4" />
             <FormControl>
                 <FormLabel>Username</FormLabel>

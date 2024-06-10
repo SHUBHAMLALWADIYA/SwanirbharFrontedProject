@@ -53,7 +53,7 @@ const CourseForm = ({ onCourseUpload }) => {
     };
 
     return (
-        <Box p={6} borderWidth="1px" borderRadius="lg" boxShadow="lg" maxW="md" mx="auto" mt={10}>
+        <Box p={6} borderWidth="1px" borderRadius="lg" boxShadow="lg" maxW="md" mx="auto" mt={10} mb={20}>
             <Heading as="h2" size="lg" mb={6} textAlign="center">Upload Course</Heading>
             <Stack spacing={4}>
                 <FormControl id="title" isRequired>
