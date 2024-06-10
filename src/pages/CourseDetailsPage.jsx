@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Heading, Text, Button, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { Box, Heading, Text, Button, Table, Thead, Tbody, Tr, Th, Td, useToast } from '@chakra-ui/react';
 
 const CourseDetailsPage = () => {
     const { id } = useParams(); // Get the course ID from URL parameters
     const [course, setCourse] = useState(null); // State to store the course details
+    const toast = useToast(); // Initialize the toast hook
 
     useEffect(() => {
         const storedCourses = JSON.parse(localStorage.getItem('courses'));
         let [selectedCourse] = storedCourses.filter(course => course.id == id);
-        console.log(storedCourses,id)
-        console.log(selectedCourse)
+        console.log(storedCourses, id);
+        console.log(selectedCourse);
         if (!selectedCourse) {
             // Handle case when course data is not found
             console.error(`Course with ID ${id} not found`);
@@ -19,6 +20,19 @@ const CourseDetailsPage = () => {
 
         setCourse(selectedCourse);
     }, [id]);
+
+    const handleEnroll = () => {
+        // Handle the enrollment logic here
+        // For example, you can save the enrollment information to local storage or send it to a server
+
+        toast({
+            title: "Enrollment Successful",
+            description: "You have successfully enrolled in the course.",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+        });
+    };
 
     if (!course) {
         // Handle case when course data is still loading or not found
@@ -70,7 +84,9 @@ const CourseDetailsPage = () => {
                 </Table>
             </Box>
             <Box mt="8">
-                <Button colorScheme="teal" size="lg">Enroll Now</Button>
+                <Button colorScheme="teal" size="lg" onClick={handleEnroll}>
+                    Enroll Now
+                </Button>
             </Box>
         </Box>
     );

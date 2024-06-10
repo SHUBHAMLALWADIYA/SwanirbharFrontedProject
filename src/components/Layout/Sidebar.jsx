@@ -23,8 +23,8 @@ import { LoginlogoutContext } from '../../context/LoginlogoutContext';
 
 const Sidebar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const menuBg = useColorModeValue('white', 'gray.700');
-  const menuColor = useColorModeValue('black', 'white');
+  const menuBg = useColorModeValue('gray.700', 'gray.700');
+  const menuColor = useColorModeValue('white', 'white');
   const menuHoverBg = useColorModeValue('gray.100', 'gray.600'); // Add hover background color
   const [notifications, setNotifications] = useState([]); // State for notifications
   const user = JSON.parse(localStorage.getItem("userData"));
