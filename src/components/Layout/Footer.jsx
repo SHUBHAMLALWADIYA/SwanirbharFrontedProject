@@ -14,7 +14,7 @@ const Footer = () => {
       textAlign="center"
       p="4"
     >
-      <Text>© {new Date().getFullYear()} LMS Dashboard. All rights reserved.</Text>
+      <Text>© {new Date().getFullYear()} LMS Dashboard. All rights reserved. created by Shubham Lalwadiya</Text>
     </Box>
   );
 };

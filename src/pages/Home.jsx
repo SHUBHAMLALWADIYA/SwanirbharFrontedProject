@@ -5,7 +5,7 @@ import { Box, Heading, Text, Button, Link } from "@chakra-ui/react";
 const Home = () => {
   return (
 
-      <Box textAlign="center">
+      <Box textAlign="center" mt="20">
         <Heading as="h1" fontSize="3xl" mt="8">
           Welcome to the LMS Dashboard!
         </Heading>
@@ -22,18 +22,7 @@ const Home = () => {
           </Link>
         </Box>
         <Box mt="12">
-          <Text fontSize="xl" fontWeight="bold">
-            Name : Shubham Lalwadiya
-          </Text>
-          <Text fontSize="lg" mt="4">
-            Batch : Cap05_155 
-          </Text>
-          <Text fontSize="lg">
-            
-          </Text>
-          <Text fontSize="lg" color="blue">
-           <a href="https://drive.google.com/file/d/1CPAtZny0JZr332u8e-Ve9V8OBHDsNEB5/view?usp=sharing"> My Resume</a>
-          </Text>
+          
         </Box>
         <Box mt="12">
           <Button colorScheme="teal" size="lg">
