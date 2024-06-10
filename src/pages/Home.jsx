@@ -23,13 +23,13 @@ const Home = () => {
         </Box>
         <Box mt="12">
           <Text fontSize="xl" fontWeight="bold">
-            Why Choose Our LMS?
+            Name : Shubham Lalwadiya
           </Text>
           <Text fontSize="lg" mt="4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Batch : Cap05_155 
           </Text>
           <Text fontSize="lg">
-            Pellentesque sit amet libero quis magna ultricies consectetur.
+            
           </Text>
           <Text fontSize="lg">
             Vestibulum rutrum nisl eu orci sodales, in lobortis tortor pulvinar.
