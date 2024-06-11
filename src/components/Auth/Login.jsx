@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { LoginlogoutContext } from "../../context/LoginlogoutContext";
 
 const Login = () => {
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const toast = useToast();
@@ -14,9 +14,9 @@ const Login = () => {
     const handleLogin = () => {
         const storedUserData = JSON.parse(localStorage.getItem("userData"));
         if (storedUserData) {
-            const { username: storedUsername, password: storedPassword } = storedUserData;
+            const { email: storedEmail, password: storedPassword } = storedUserData;
 
-            if (username === storedUsername && password === storedPassword) {
+            if (email === storedEmail && password === storedPassword) {
                 console.log("Login successful");
                 toast({
                     title: "Login successful.",
@@ -29,7 +29,7 @@ const Login = () => {
                 setToggle(true);
                 navigate("/");
             } else {
-                setError("Invalid username or password");
+                setError("Invalid email or password");
             }
         } else {
             setError("No user found. Please sign up first.");
@@ -61,17 +61,17 @@ const Login = () => {
                 <Text fontSize="lg" mb="4" color={textColor}>
                     Welcome back! Please login to continue.
                 </Text>
-                <FormControl id="username">
-                    <FormLabel>Username</FormLabel>
+                <FormControl id="email" isRequired>
+                    <FormLabel>Email</FormLabel>
                     <Input
-                        placeholder="Enter your username"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        placeholder="Enter your email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         borderColor={inputBorderColor}
                         _hover={{ borderColor: inputHoverBorderColor }}
                     />
                 </FormControl>
-                <FormControl id="password">
+                <FormControl id="password" isRequired>
                     <FormLabel>Password</FormLabel>
                     <Input
                         type="password"
